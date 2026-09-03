@@ -14,6 +14,7 @@ function validateOrder(input: T.OrderInput): void {
 
 /** UPI order, QR, collect-request, and VPA operations. */
 export class UpiResource {
+  /** @internal */
   constructor(private readonly http: HttpClient) {}
   /** Creates mobile UPI deep links for a new order. */
   createIntent(input: T.OrderInput, options?: T.RequestOptions) { validateOrder(input); return this.http.request<T.IntentOrder>({ method: "POST", path: "/order/intent", body: input, options }); }
@@ -31,6 +32,7 @@ export class UpiResource {
 
 /** Refund lifecycle and dispute-hold operations. */
 export class RefundsResource {
+  /** @internal */
   constructor(private readonly http: HttpClient) {}
   /** Initiates a full or partial refund for a successful UPI transaction. */
   create(input: T.CreateRefundInput, options?: T.RequestOptions) {
@@ -55,6 +57,7 @@ export class RefundsResource {
 
 /** Payment-link creation, lookup, and delivery operations. */
 export class PaymentLinksResource {
+  /** @internal */
   constructor(private readonly http: HttpClient) {}
   /** Creates a time-limited payment link and optionally delivers it to the customer. */
   create(input: T.CreatePaymentLinkInput, options?: T.RequestOptions) { positive(input.amount, "amount"); required(input.remarks, "remarks"); maxLength(input.remarks, 20, "remarks"); integerRange(input.validity, 1, 1440, "validity"); required(input.customerName, "customerName"); maxLength(input.customerName, 100, "customerName"); mobile(input.customerMobileNo, "customerMobileNo"); maxLength(input.customerEmail, 250, "customerEmail"); return this.http.request<T.PaymentLink>({ method: "POST", path: "/linkpayment", body: input, options }); }
@@ -66,6 +69,7 @@ export class PaymentLinksResource {
 
 /** Virtual-account customer and transaction operations. */
 export class VirtualAccountsResource {
+  /** @internal */
   constructor(private readonly http: HttpClient) {}
   /** Creates a customer and assigns a virtual bank account. */
   create(input: T.CreateVirtualAccountInput, options?: T.RequestOptions) { required(input.externalCustomerId, "externalCustomerId"); maxLength(input.externalCustomerId, 36, "externalCustomerId"); mobile(input.mobileNo); maxItems(input.whitelistedRemitters, 5, "whitelistedRemitters"); return this.http.request<T.VirtualAccount>({ method: "POST", path: "/customers", body: input, options }); }
@@ -83,6 +87,7 @@ export class VirtualAccountsResource {
 
 /** Settlement status, reconciliation file, and date-listing operations. */
 export class SettlementsResource {
+  /** @internal */
   constructor(private readonly http: HttpClient) {}
   /** Retrieves settlement details by case-sensitive settlement ID. */
   get(settlementId: string, options?: T.RequestOptions) { required(settlementId, "settlementId"); maxLength(settlementId, 50, "settlementId"); return this.http.request<T.Settlement>({ method: "GET", path: `/settlements/${segment(settlementId)}`, options }); }

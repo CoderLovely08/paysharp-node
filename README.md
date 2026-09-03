@@ -13,7 +13,7 @@ An unofficial, TypeScript-first SDK covering PaySharp's publicly documented v1 A
 
 Some PaySharp products are limited-preview features and must be enabled on the merchant account.
 
-For every method, input, response, and endpoint mapping, see the [API reference](docs/API.md). Runnable programs are available in [`examples/`](examples/).
+For every method, input, response, and endpoint mapping, see the [API reference](docs/API.md). Runnable programs are available in the [examples directory](https://github.com/CoderLovely08/paysharp-node/tree/main/examples).
 
 ## Install
 
@@ -137,9 +137,12 @@ The public v1 documentation does not specify a webhook signature scheme. Restric
 npm install
 npm run check
 npm test
+npm run docs:generate
 ```
 
 The SDK returns the `data` member of PaySharp's `{ code, message, data }` response envelope and throws `PaySharpError` for API errors.
+
+`npm run docs:generate` builds browsable HTML from the public TSDoc into the ignored `site/` directory.
 
 ## Documentation
 

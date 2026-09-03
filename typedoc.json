@@ -1,0 +1,21 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": [
+    "src/index.ts",
+    "src/resources.ts",
+    "src/types.ts",
+    "src/errors.ts",
+    "src/webhooks.ts"
+  ],
+  "out": "site",
+  "readme": "README.md",
+  "name": "PaySharp Node.js SDK",
+  "includeVersion": true,
+  "excludePrivate": true,
+  "excludeInternal": true,
+  "githubPages": true,
+  "navigationLinks": {
+    "GitHub": "https://github.com/CoderLovely08/paysharp-node",
+    "npm": "https://www.npmjs.com/package/paysharp-node"
+  }
+}

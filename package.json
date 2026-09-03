@@ -33,6 +33,7 @@
   "scripts": {
     "build": "tsup src/index.ts --format esm,cjs --dts --clean",
     "check": "tsc --noEmit",
+    "docs:generate": "typedoc",
     "lint": "eslint src",
     "test": "npm run build && node --test test/*.test.mjs",
     "prepublishOnly": "npm run lint && npm run check && npm test"
@@ -50,6 +51,7 @@
   "devDependencies": {
     "eslint": "^10.9.1",
     "tsup": "^8.5.0",
+    "typedoc": "^0.28.20",
     "typescript": "^5.9.2",
     "typescript-eslint": "^8.69.0"
   },
