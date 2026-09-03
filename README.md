@@ -13,6 +13,8 @@ An unofficial, TypeScript-first SDK covering PaySharp's publicly documented v1 A
 
 Some PaySharp products are limited-preview features and must be enabled on the merchant account.
 
+For every method, input, response, and endpoint mapping, see the [API reference](docs/API.md). Runnable programs are available in [`examples/`](examples/).
+
 ## Install
 
 ```bash
@@ -137,3 +139,10 @@ npm test
 ```
 
 The SDK returns the `data` member of PaySharp's `{ code, message, data }` response envelope and throws `PaySharpError` for API errors.
+
+## Documentation
+
+- [Complete SDK API reference](docs/API.md)
+- [Sandbox setup and testing](docs/SANDBOX.md)
+- [UPI intent example](examples/create-upi-intent.mjs)
+- [Webhook example for Express](examples/express-webhook.mjs)
