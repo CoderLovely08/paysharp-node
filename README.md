@@ -13,7 +13,7 @@ An unofficial, TypeScript-first SDK covering PaySharp's publicly documented v1 A
 
 Some PaySharp products are limited-preview features and must be enabled on the merchant account.
 
-For every method, input, response, and endpoint mapping, see the [API reference](docs/API.md). Runnable programs are available in the [examples directory](https://github.com/CoderLovely08/paysharp-node/tree/main/examples).
+For every method, input, response, and endpoint mapping, see the [handwritten API guide](docs/API.md) or the [generated API reference](https://coderlovely08.github.io/paysharp-node/). Runnable programs are available in the [examples directory](https://github.com/CoderLovely08/paysharp-node/tree/main/examples).
 
 ## Install
 
