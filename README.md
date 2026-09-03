@@ -144,5 +144,7 @@ The SDK returns the `data` member of PaySharp's `{ code, message, data }` respon
 
 - [Complete SDK API reference](docs/API.md)
 - [Sandbox setup and testing](docs/SANDBOX.md)
+- [Changelog](CHANGELOG.md)
+- [Release process](docs/RELEASING.md)
 - [UPI intent example](examples/create-upi-intent.mjs)
 - [Webhook example for Express](examples/express-webhook.mjs)
