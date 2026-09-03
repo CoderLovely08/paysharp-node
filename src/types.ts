@@ -1,19 +1,30 @@
 export type Fetch = typeof globalThis.fetch;
 
+/** Configuration used to construct a PaySharp API client. */
 export interface PaySharpConfig {
+  /** Bearer token generated in the PaySharp merchant dashboard. */
   token: string;
+  /** Exact sandbox or production API base URL supplied by PaySharp. */
   baseUrl: string;
+  /** Default request timeout in milliseconds. Defaults to 30 seconds. */
   timeoutMs?: number;
+  /** Maximum retries for retryable GET responses. Defaults to 2. */
   maxRetries?: number;
+  /** Optional Fetch-compatible implementation, primarily for testing or instrumentation. */
   fetch?: Fetch;
+  /** Optional User-Agent value for server-side request identification. */
   userAgent?: string;
 }
 
+/** Per-request controls accepted as the final argument by every SDK operation. */
 export interface RequestOptions {
+  /** Signal used to cancel the request and any pending retry delay. */
   signal?: AbortSignal;
+  /** Timeout override for this request, in milliseconds. */
   timeoutMs?: number;
 }
 
+/** Successful response envelope returned by PaySharp before SDK unwrapping. */
 export interface PaySharpEnvelope<T> {
   code: number;
   message: string;
@@ -30,6 +41,7 @@ export interface PaySharpErrorBody {
 export type PaymentStatus = "PENDING" | "ON PROGRESS" | "SUCCESS" | "FAILED" | "EXPIRED";
 export type RefundStatus = "PENDING" | "SUCCESS" | "FAILURE";
 
+/** Common fields used to create UPI intent and QR orders. */
 export interface OrderInput {
   orderId: string;
   amount: number;
@@ -237,8 +249,13 @@ export interface SettlementListItem {
   settlementAmount: number;
 }
 
+/** Payment status callback payload, including the webhook delivery attempt number. */
 export interface PaymentWebhook extends OrderStatus { attemptCount: number; }
+/** Refund status callback payload. */
 export interface RefundWebhook extends RefundDetails { attemptCount?: number; }
+/** Settlement callback payload. Fields vary with the enabled settlement product. */
 export interface SettlementWebhook extends Partial<Settlement> { settlementId: string; settlementDate: string; }
+/** Virtual-account transaction callback payload. */
 export interface VirtualAccountWebhook extends VirtualAccountTransaction { attemptCount: number; }
+/** Union of webhook shapes documented by the supported PaySharp v1 products. */
 export type PaySharpWebhook = PaymentWebhook | RefundWebhook | SettlementWebhook | VirtualAccountWebhook;
