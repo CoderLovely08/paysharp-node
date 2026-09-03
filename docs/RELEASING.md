@@ -17,6 +17,7 @@ Releases follow Semantic Versioning. A published version is immutable; fixes req
 
 ```bash
 npm ci
+npm run lint
 npm run check
 npm test
 npm audit

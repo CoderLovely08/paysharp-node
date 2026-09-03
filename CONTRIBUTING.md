@@ -8,6 +8,7 @@ Thanks for helping improve `paysharp-node`. Contributions should remain small, r
 git clone https://github.com/CoderLovely08/paysharp-node.git
 cd paysharp-node
 npm install
+npm run lint
 npm run check
 npm test
 ```
@@ -19,7 +20,7 @@ Node.js 18 is the minimum supported version. CI also verifies current active and
 1. Create a focused branch from `main`.
 2. Add or update tests for behavior changes.
 3. Update TSDoc and Markdown documentation when the public API changes.
-4. Run `npm run check`, `npm test`, and `npm pack --dry-run`.
+4. Run `npm run lint`, `npm run check`, `npm test`, and `npm pack --dry-run`.
 5. Open a pull request explaining the motivation, behavior, and verification performed.
 
 Do not include merchant tokens, base URLs tied to private accounts, customer data, complete webhook payloads from production, or unredacted PaySharp dashboard screenshots.

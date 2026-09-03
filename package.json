@@ -13,8 +13,14 @@
       "require": "./dist/index.cjs"
     }
   },
-  "files": ["dist", "README.md", "LICENSE"],
-  "engines": { "node": ">=18" },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
   "author": "Lovely Sharma",
   "repository": {
     "type": "git",
@@ -27,15 +33,25 @@
   "scripts": {
     "build": "tsup src/index.ts --format esm,cjs --dts --clean",
     "check": "tsc --noEmit",
+    "lint": "eslint src",
     "test": "npm run build && node --test test/*.test.mjs",
-    "prepublishOnly": "npm run check && npm test"
+    "prepublishOnly": "npm run lint && npm run check && npm test"
   },
-  "keywords": ["paysharp", "payments", "upi", "payment-gateway", "nodejs", "typescript"],
+  "keywords": [
+    "paysharp",
+    "payments",
+    "upi",
+    "payment-gateway",
+    "nodejs",
+    "typescript"
+  ],
   "license": "MIT",
   "sideEffects": false,
   "devDependencies": {
+    "eslint": "^10.9.1",
     "tsup": "^8.5.0",
-    "typescript": "^5.9.2"
+    "typescript": "^5.9.2",
+    "typescript-eslint": "^8.69.0"
   },
   "overrides": {
     "esbuild": "^0.28.2"

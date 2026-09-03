@@ -33,6 +33,10 @@ jobs:
       - name: Check TypeScript
         run: npm run check
 
+      - name: Lint source
+        if: matrix.node-version == 24
+        run: npm run lint
+
       - name: Run tests
         run: npm test
 
