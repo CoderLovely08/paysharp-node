@@ -1,0 +1,32 @@
+name: Feature request
+description: Suggest an SDK capability or API addition
+title: "[Feature]: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What integration problem should this solve?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed API
+      description: Show the SDK interface you would like to use.
+      render: typescript
+    validations:
+      required: true
+  - type: input
+    id: documentation
+    attributes:
+      label: Official PaySharp documentation
+      description: Link the relevant public API documentation when applicable.
+  - type: checkboxes
+    id: compatibility
+    attributes:
+      label: Compatibility
+      options:
+        - label: I considered whether this can be added without breaking existing users.
+          required: true
