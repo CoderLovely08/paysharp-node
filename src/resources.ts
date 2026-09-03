@@ -1,4 +1,5 @@
-import { HttpClient, segment } from "./http.js";
+import { segment } from "./http.js";
+import type { HttpClient } from "./http.js";
 import { PaySharpValidationError } from "./errors.js";
 import { digitLength, integerRange, maxItems, maxLength, mobile, oneOf, positive, required } from "./validation.js";
 import type * as T from "./types.js";
@@ -36,7 +37,10 @@ export class RefundsResource {
     required(input.paysharpReferenceNo, "paysharpReferenceNo");
     maxLength(input.paysharpReferenceNo, 50, "paysharpReferenceNo");
     oneOf(input.refundType, ["FULL", "PARTIAL"], "refundType");
-    if (input.refundType === "PARTIAL") positive(input.refundAmount!, "refundAmount");
+    if (input.refundType === "PARTIAL") {
+      if (input.refundAmount === undefined) throw new PaySharpValidationError("refundAmount is required for partial refunds");
+      positive(input.refundAmount, "refundAmount");
+    }
     return this.http.request<T.RefundCreated>({ method: "POST", path: "/refunds", body: input, options });
   }
   /** Lists every refund associated with an original PaySharp payment reference. */

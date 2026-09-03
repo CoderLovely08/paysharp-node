@@ -55,10 +55,11 @@ export class HttpClient {
             await delay(Number.isFinite(retryAfter) ? retryAfter * 1000 : 250 * 2 ** attempt, options?.signal);
             continue;
           }
+          const requestId = response.headers.get("x-request-id") ?? undefined;
           throw new PaySharpError(details?.message ?? `PaySharp request failed with HTTP ${response.status}`, {
             status: response.status,
             ...(details?.errorCode !== undefined ? { code: details.errorCode } : {}),
-            ...(response.headers.get("x-request-id") ? { requestId: response.headers.get("x-request-id")! } : {}),
+            ...(requestId ? { requestId } : {}),
             ...(details ? { details } : {})
           });
         }
