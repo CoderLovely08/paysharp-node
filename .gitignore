@@ -3,5 +3,6 @@ dist/
 coverage/
 .env
 *.log
+.DS_Store
 work/
 outputs/
