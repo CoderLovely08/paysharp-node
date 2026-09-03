@@ -259,3 +259,5 @@ export interface SettlementWebhook extends Partial<Settlement> { settlementId: s
 export interface VirtualAccountWebhook extends VirtualAccountTransaction { attemptCount: number; }
 /** Union of webhook shapes documented by the supported PaySharp v1 products. */
 export type PaySharpWebhook = PaymentWebhook | RefundWebhook | SettlementWebhook | VirtualAccountWebhook;
+/** Runtime classification returned by `getWebhookKind`. */
+export type PaySharpWebhookKind = "payment" | "refund" | "settlement" | "virtual-account" | "unknown";

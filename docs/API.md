@@ -118,10 +118,31 @@ Settlement file URLs expire after one hour according to PaySharp's documentation
 
 ## Webhooks
 
-`parseWebhook` accepts a JSON string, a `Uint8Array`, or an already parsed value and returns a `PaySharpWebhook`. `webhookAcknowledgement()` returns the response body PaySharp documents:
+`parseWebhook` accepts a JSON string, a `Uint8Array`, or an already parsed value and returns a recognized `PaySharpWebhook`. It rejects non-object and unrecognized payloads. `webhookAcknowledgement()` returns the response body PaySharp documents:
 
 ```json
 { "code": 200, "message": "success" }
+```
+
+Use `getWebhookKind` or the exported type guards to narrow the callback:
+
+```ts
+const event = parseWebhook(rawBody);
+
+switch (getWebhookKind(event)) {
+  case "payment":
+    if (isPaymentWebhook(event)) console.log(event.orderId, event.status);
+    break;
+  case "refund":
+    if (isRefundWebhook(event)) console.log(event.refundPaysharpReferenceNo);
+    break;
+  case "settlement":
+    if (isSettlementWebhook(event)) console.log(event.settlementId);
+    break;
+  case "virtual-account":
+    if (isVirtualAccountWebhook(event)) console.log(event.externalCustomerId);
+    break;
+}
 ```
 
 The public API documentation does not describe a signature header or verification algorithm. `parseWebhook` therefore parses payloads but does not claim to authenticate them. Apply network restrictions supported by your merchant configuration and process events idempotently.

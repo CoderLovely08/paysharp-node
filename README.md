@@ -121,9 +121,10 @@ GET requests retry HTTP 429 and 5xx responses by default. Mutating requests are 
 ## Webhooks
 
 ```ts
-import { parseWebhook, webhookAcknowledgement } from "paysharp-node";
+import { getWebhookKind, parseWebhook, webhookAcknowledgement } from "paysharp-node";
 
 const event = parseWebhook(rawRequestBody);
+console.log(getWebhookKind(event));
 // Persist/process the event idempotently, then return:
 res.status(200).json(webhookAcknowledgement());
 ```

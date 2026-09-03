@@ -48,6 +48,6 @@ test("validates high-risk request fields before network calls", async () => {
 });
 
 test("parses webhooks and builds the required acknowledgement", () => {
-  assert.equal(parseWebhook('{"status":"SUCCESS","orderId":"o1"}').status, "SUCCESS");
+  assert.equal(parseWebhook('{"status":"SUCCESS","orderId":"o1","paysharpReferenceNo":"ref-1"}').status, "SUCCESS");
   assert.deepEqual(webhookAcknowledgement(), { code: 200, message: "success" });
 });

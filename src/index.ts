@@ -37,6 +37,14 @@ export class PaySharp {
 }
 
 export { PaySharpError, PaySharpTimeoutError, PaySharpValidationError } from "./errors.js";
-export { parseWebhook, webhookAcknowledgement } from "./webhooks.js";
+export {
+  getWebhookKind,
+  isPaymentWebhook,
+  isRefundWebhook,
+  isSettlementWebhook,
+  isVirtualAccountWebhook,
+  parseWebhook,
+  webhookAcknowledgement,
+} from "./webhooks.js";
 export type * from "./types.js";
 export default PaySharp;
