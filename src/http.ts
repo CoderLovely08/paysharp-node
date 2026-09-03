@@ -5,6 +5,10 @@ type Method = "GET" | "POST" | "PUT" | "DELETE";
 export interface RawRequest { method: Method; path: string; body?: unknown; options?: RequestOptions; }
 
 const delay = (ms: number, signal?: AbortSignal) => new Promise<void>((resolve, reject) => {
+  if (signal?.aborted) {
+    reject(signal.reason);
+    return;
+  }
   const timer = setTimeout(resolve, ms);
   signal?.addEventListener("abort", () => { clearTimeout(timer); reject(signal.reason); }, { once: true });
 });
@@ -22,11 +26,15 @@ export class HttpClient {
     if (!this.fetcher) throw new TypeError("A Fetch implementation is required");
     this.baseUrl = config.baseUrl.replace(/\/+$/, "");
     this.timeoutMs = config.timeoutMs ?? 30_000;
-    this.maxRetries = Math.max(0, config.maxRetries ?? 2);
+    this.maxRetries = config.maxRetries ?? 2;
+    if (!Number.isFinite(this.timeoutMs) || this.timeoutMs <= 0) throw new TypeError("timeoutMs must be a positive number");
+    if (!Number.isInteger(this.maxRetries) || this.maxRetries < 0) throw new TypeError("maxRetries must be a non-negative integer");
   }
 
   async request<T>({ method, path, body, options }: RawRequest): Promise<T> {
     const timeoutMs = options?.timeoutMs ?? this.timeoutMs;
+    if (!Number.isFinite(timeoutMs) || timeoutMs <= 0) throw new TypeError("timeoutMs must be a positive number");
+    if (options?.signal?.aborted) throw options.signal.reason;
     for (let attempt = 0; ; attempt++) {
       const controller = new AbortController();
       const timeout = setTimeout(() => controller.abort(new PaySharpTimeoutError(timeoutMs)), timeoutMs);

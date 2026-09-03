@@ -71,3 +71,35 @@ test("handles an empty non-success response", async () => {
     return true;
   });
 });
+
+test("does not start a request when its signal is already aborted", async () => {
+  let called = false;
+  const reason = new Error("caller cancelled");
+  const controller = new AbortController();
+  controller.abort(reason);
+  const client = new PaySharp({
+    token: "token",
+    baseUrl: "https://api.example.test",
+    fetch: async () => {
+      called = true;
+      return success({});
+    },
+  });
+
+  await assert.rejects(client.upi.getOrder("order-1", { signal: controller.signal }), reason);
+  assert.equal(called, false);
+});
+
+test("validates retry and timeout configuration", async () => {
+  assert.throws(
+    () => new PaySharp({ token: "token", baseUrl: "https://api.example.test", maxRetries: 1.5 }),
+    /non-negative integer/,
+  );
+  assert.throws(
+    () => new PaySharp({ token: "token", baseUrl: "https://api.example.test", timeoutMs: 0 }),
+    /positive number/,
+  );
+
+  const client = new PaySharp({ token: "token", baseUrl: "https://api.example.test", fetch: async () => success({}) });
+  await assert.rejects(client.upi.getOrder("order-1", { timeoutMs: -1 }), /positive number/);
+});
