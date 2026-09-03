@@ -1,5 +1,10 @@
 # PaySharp Node.js SDK
 
+[![npm version](https://img.shields.io/npm/v/paysharp-node.svg)](https://www.npmjs.com/package/paysharp-node)
+[![CI](https://github.com/CoderLovely08/paysharp-node/actions/workflows/ci.yml/badge.svg)](https://github.com/CoderLovely08/paysharp-node/actions/workflows/ci.yml)
+[![API documentation](https://img.shields.io/badge/docs-TypeDoc-blue.svg)](https://coderlovely08.github.io/paysharp-node/)
+[![license](https://img.shields.io/npm/l/paysharp-node.svg)](LICENSE)
+
 An unofficial, TypeScript-first SDK covering PaySharp's publicly documented v1 APIs. It has no runtime dependencies and works with Node.js 18 or newer.
 
 ## Supported APIs
