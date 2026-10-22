@@ -50,7 +50,7 @@
   "sideEffects": false,
   "devDependencies": {
     "eslint": "^10.9.1",
-    "tsup": "^8.5.0",
+    "tsup": "^9.0.0",
     "typedoc": "^0.28.20",
     "typescript": "^5.9.2",
     "typescript-eslint": "^8.69.0"
